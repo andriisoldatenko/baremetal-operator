@@ -4,24 +4,24 @@ import (
 	"fmt"
 )
 
-type ImageBuildInvalid struct {
+type ImageBuildInvalidError struct {
 	err error
 }
 
-func (ibf ImageBuildInvalid) Error() string {
+func (ibf ImageBuildInvalidError) Error() string {
 	return fmt.Sprintf("Cannot generate image: %s", ibf.err.Error())
 }
 
-func (ibf ImageBuildInvalid) Unwrap() error {
+func (ibf ImageBuildInvalidError) Unwrap() error {
 	return ibf.err
 }
 
-func BuildInvalidError(err error) ImageBuildInvalid {
-	return ImageBuildInvalid{err: err}
+func BuildInvalidError(err error) ImageBuildInvalidError {
+	return ImageBuildInvalidError{err: err}
 }
 
-type ImageNotReady struct{}
+type ImageNotReadyError struct{}
 
-func (inr ImageNotReady) Error() string {
+func (inr ImageNotReadyError) Error() string {
 	return "Image is not ready yet"
 }
